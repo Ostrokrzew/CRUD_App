@@ -17,7 +17,7 @@ public class Add {
 	
 	//adding chosen record
 	public static String addProduct(String id_produkty, String nazwa, String cena) {
-		String add = String.format("INSERT INTO produkty (imie, nazwisko, id_konto) VALUES ('%s', '%s', %s);", id_produkty, nazwa, cena);
+		String add = String.format("INSERT INTO produkty (id_produkty, nazwa, cena) VALUES ('%s', '%s', %s);", id_produkty, nazwa, cena);
         try {
             SQLite.stat.execute(add);
         } catch (SQLException e) {
@@ -29,24 +29,24 @@ public class Add {
 	
 	//adding chosen record
 	public static String addTransaction(String id_klienci, String id_produkty, String data_zakupy) {
-		String add = String.format("INSERT INTO zakupy (imie, nazwisko, id_konto) VALUES ('%s', '%s', %s);", id_klienci, id_produkty, data_zakupy);
+		String add = String.format("INSERT INTO zakupy (id_klienci, id_produkty, data_zakupy) VALUES ('%s', '%s', '%s');", id_klienci, id_produkty, data_zakupy);
         try {
             SQLite.stat.execute(add);
         } catch (SQLException e) {
             e.printStackTrace();
-            return "B³¹d przy dodawaniu tranzakcji.";
+            return "B³¹d przy dodawaniu transakcji.";
         }
-        return "Tranzakcjê dodano pomyœlnie.";
+        return "transakcjê dodano pomyœlnie.";
 	}
 	
 	//adding chosen record
 	public static String addAccount(String id_konto, String kwota, String nazwisko) {
-		String add = String.format("INSERT INTO konto (imie, nazwisko, id_konto) VALUES ('%s', '%s', %s);", id_konto, kwota, nazwisko);
+		String add = String.format("INSERT INTO konto (id_konto, kwota, nazwisko) VALUES (%s, %s, '%s');", id_konto, kwota, nazwisko);
         try {
             SQLite.stat.execute(add);
         } catch (SQLException e) {
             e.printStackTrace();
-            return "B³¹d przy dodawaniu konta.\nNazwisko nie mo¿e pozostaæ puste.";
+            return "B³¹d przy dodawaniu konta.";
         }
         return "Konto dodano pomyœlnie.";
 	}

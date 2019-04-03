@@ -45,9 +45,9 @@ public class Delete {
             SQLite.stat.execute(delete);
         } catch (SQLException e) {
             e.printStackTrace();
-            return "B³¹d przy usuwaniu tranzakcji.";
+            return "B³¹d przy usuwaniu transakcji.";
         }
-        return "Tranzakcjê usuniêto pomyœlnie.";
+        return "transakcjê usuniêto pomyœlnie.";
 	}
 	
 	public static String deleteAccount(String param) {
