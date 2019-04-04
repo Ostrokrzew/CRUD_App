@@ -47,14 +47,14 @@ public class ShowMeDB {
     	ObservableList<Zakupy> zakup = FXCollections.observableArrayList();
         try {
             ResultSet result = SQLite.stat.executeQuery("SELECT * FROM zakupy"
-            		+ " INNER JOIN klienci ON zakupy.id_klienci = klienci.id_klienci"
+            		+ " INNER JOIN klienci ON zakupy.id_konto = klienci.id_konto"
             		+ " INNER JOIN produkty ON zakupy.id_produkty = produkty.id_produkty");
             while(result.next()) {
                 int id_zakupy = result.getInt("id_zakupy");
-                int id_klienci = result.getInt("id_klienci");
+                int id_konto = result.getInt("id_konto");
                 int id_produkty = result.getInt("id_produkty");
                 Date data_zakupy = result.getDate("data_zakupy");
-                zakup.add(new Zakupy(id_zakupy, id_klienci, id_produkty, data_zakupy));
+                zakup.add(new Zakupy(id_zakupy, id_konto, id_produkty, data_zakupy));
             }
         } catch (SQLException e) {
             e.printStackTrace();

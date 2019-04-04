@@ -1,6 +1,10 @@
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class Klienci {
 	
@@ -49,24 +53,37 @@ public class Klienci {
 		this.id_klienci = id_klienci;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static TableView<Klienci> clientTable() {
 		
-		TableColumn<Klienci, Integer> klienciIdCol = new TableColumn<>("LP");
-		klienciIdCol.setPrefWidth(64);
-		klienciIdCol.setCellValueFactory(new PropertyValueFactory<>("id_klienci"));
+		//autoincrementing column
+		TableColumn klienciIdCol = new TableColumn("LP");
+		klienciIdCol.setCellValueFactory(new Callback<CellDataFeatures<Klienci, String>, ObservableValue<String>>() {
+		  @Override public ObservableValue<String> call(CellDataFeatures<Klienci, String> p) {
+		    return new ReadOnlyObjectWrapper(clientTable.getItems().indexOf(p.getValue())+1 + "");
+		  }
+		});   
+		klienciIdCol.setSortable(false);
+		
+//		TableColumn<Klienci, Integer> klienciIdCol = new TableColumn<>("LP");
+//		klienciIdCol.setPrefWidth(64);
+//		klienciIdCol.setCellValueFactory(new PropertyValueFactory<>("id_klienci"));
+//		klienciIdCol.setId("id_klienci");
 		
 		TableColumn<Klienci, String> klienciNameCol = new TableColumn<>("Imiê");
 		klienciNameCol.setPrefWidth(192);
 		klienciNameCol.setCellValueFactory(new PropertyValueFactory<>("imie"));
+		klienciNameCol.setId("imie");
 		
 		TableColumn<Klienci, String> klienciSurnameCol = new TableColumn<>("Nazwisko");
 		klienciSurnameCol.setPrefWidth(192);
 		klienciSurnameCol.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
+		klienciSurnameCol.setId("nazwisko");
 		
 		TableColumn<Klienci, Integer> klienciAccountCol = new TableColumn<>("Nr konta");
-		klienciAccountCol.setPrefWidth(128);
+		klienciAccountCol.setPrefWidth(156);
 		klienciAccountCol.setCellValueFactory(new PropertyValueFactory<>("id_konto"));
+		klienciAccountCol.setId("id_konto");
 	
 		clientTable = new TableView<>();
 		clientTable.setItems(ShowMeDB.showKlienci());

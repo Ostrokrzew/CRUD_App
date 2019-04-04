@@ -17,7 +17,7 @@ public class Add {
 	
 	//adding chosen record
 	public static String addProduct(String id_produkty, String nazwa, String cena) {
-		String add = String.format("INSERT INTO produkty (id_produkty, nazwa, cena) VALUES ('%s', '%s', %s);", id_produkty, nazwa, cena);
+		String add = String.format("INSERT INTO produkty (id_produkty, nazwa, cena) VALUES (%s, '%s', %s);", id_produkty, nazwa, cena);
         try {
             SQLite.stat.execute(add);
         } catch (SQLException e) {
@@ -28,8 +28,8 @@ public class Add {
 	}
 	
 	//adding chosen record
-	public static String addTransaction(String id_klienci, String id_produkty, String data_zakupy) {
-		String add = String.format("INSERT INTO zakupy (id_klienci, id_produkty, data_zakupy) VALUES ('%s', '%s', '%s');", id_klienci, id_produkty, data_zakupy);
+	public static String addTransaction(String id_konto, String id_produkty, String data_zakupy) {
+		String add = String.format("INSERT INTO zakupy (id_konto, id_produkty, data_zakupy) VALUES (%s, %s, '%s');", id_konto, id_produkty, data_zakupy);
         try {
             SQLite.stat.execute(add);
         } catch (SQLException e) {

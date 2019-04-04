@@ -48,13 +48,13 @@ public class AddRecords {
     public static void addZakupy() {
 	    String vrbl;
 	    try {
-	    	vrbl="INSERT INTO zakupy (id_klienci, id_produkty, data_zakupy) VALUES (1, 495615, '2010-03-07 21:37:05.000');";
+	    	vrbl="INSERT INTO zakupy (id_konto, id_produkty, data_zakupy) VALUES ('20001', 495615, '2010-03-07 21:37:05.000');";
 	    	SQLite.stat.execute(vrbl);
-	    	vrbl="INSERT INTO zakupy (id_klienci, id_produkty, data_zakupy) VALUES (3, 943516, '2012-12-10 14:14:23.000');";
+	    	vrbl="INSERT INTO zakupy (id_konto, id_produkty, data_zakupy) VALUES ('30322', 943516, '2012-12-10 14:14:23.000');";
 	    	SQLite.stat.execute(vrbl);
-	    	vrbl="INSERT INTO zakupy (id_klienci, id_produkty, data_zakupy) VALUES (4, 921375, '2011-11-11 15:26:10.000');";
+	    	vrbl="INSERT INTO zakupy (id_konto, id_produkty, data_zakupy) VALUES ('12113', 921375, '2011-11-11 15:26:10.000');";
 	    	SQLite.stat.execute(vrbl);
-	    	vrbl="INSERT INTO zakupy (id_klienci, id_produkty, data_zakupy) VALUES (2, 612431, '2011-01-16 19:04:58.000');";
+	    	vrbl="INSERT INTO zakupy (id_konto, id_produkty, data_zakupy) VALUES ('16154', 612431, '2011-01-16 19:04:58.000');";
 	    	SQLite.stat.execute(vrbl);
 	    } catch (SQLException e) {
 	        System.err.println("B³¹d przy dodawaniu zakupów.");

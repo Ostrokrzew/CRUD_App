@@ -3,22 +3,22 @@ import java.sql.SQLException;
 public class Delete {
 	/*This class contains method that deletes chosen record*/
 	
-	//deleting chosen record
-	public static String hardDelete(String table, String id_name, String id_value) {
-		String delete = String.format("DELETE FROM %s WHERE %s == '%s'", table, id_name, id_value);
+	public static String deleteClient(String id, String kon) {
+        String delete = String.format("DELETE FROM zakupy WHERE id_konto == %s", kon);
         try {
             SQLite.stat.execute(delete);
         } catch (SQLException e) {
             e.printStackTrace();
-            return "B³¹d przy usuwaniu rekordu.";
+            return "B³¹d przy usuwaniu klienta.";
         }
-        return "Rekord usuniêto pomyœlnie.";
-	}
-}
-/*	unnecessary code
-
-	public static String deleteClient(String param) {
-        String delete = String.format("DELETE * FROM klienci WHERE id_klienci == '%s'", param);
+        delete = String.format("DELETE FROM konto WHERE id_konto == %s", kon);
+        try {
+            SQLite.stat.execute(delete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "B³¹d przy usuwaniu klienta.";
+        }
+        delete = String.format("DELETE FROM klienci WHERE id_klienci == %s", id);
         try {
             SQLite.stat.execute(delete);
         } catch (SQLException e) {
@@ -29,7 +29,14 @@ public class Delete {
 	}
 	
 	public static String deleteProduct(String param) {
-        String delete = String.format("DELETE * FROM produkty WHERE id_p == '%s'", param);
+        String delete = String.format("DELETE FROM zakupy WHERE id_produkty == %s", param);
+        try {
+            SQLite.stat.execute(delete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "B³¹d przy usuwaniu produktu.";
+        }
+        delete = String.format("DELETE FROM produkty WHERE id_produkty == %s", param);
         try {
             SQLite.stat.execute(delete);
         } catch (SQLException e) {
@@ -40,7 +47,7 @@ public class Delete {
 	}
 	
 	public static String deleteTransaction(String param) {
-        String delete = String.format("DELETE * FROM zakupy WHERE id_zakupy == '%s'", param);
+        String delete = String.format("DELETE FROM zakupy WHERE id_zakupy == %s", param);
         try {
             SQLite.stat.execute(delete);
         } catch (SQLException e) {
@@ -51,7 +58,7 @@ public class Delete {
 	}
 	
 	public static String deleteAccount(String param) {
-        String delete = String.format("DELETE * FROM konto WHERE id_konto == '%s'", param);
+        String delete = String.format("DELETE FROM konto WHERE id_konto == %s", param);
         try {
             SQLite.stat.execute(delete);
         } catch (SQLException e) {
@@ -61,4 +68,3 @@ public class Delete {
         return "Konto usuniêto pomyœlnie.";
 	}
 }
-*/

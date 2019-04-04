@@ -19,17 +19,17 @@ public class InitiateDB {
         
         String createZakupy = "CREATE TABLE IF NOT EXISTS zakupy "
         		+ "(id_zakupy INTEGER PRIMARY KEY AUTOINCREMENT,"
-        		+ "id_klienci int,"
+        		+ "id_konto INTEGER,"
         		+ "id_produkty int,"
         		+ "data_zakupy TEXT,"
-        		+ "FOREIGN KEY (id_klienci) REFERENCES klienci (id_klienci) ON UPDATE SET NULL,"
-        		+ "FOREIGN KEY (id_produkty) REFERENCES produkty (id_produkty) ON UPDATE SET NULL)";
+        		+ "FOREIGN KEY (id_konto) REFERENCES klienci (id_konto) ON DELETE SET NULL,"
+        		+ "FOREIGN KEY (id_produkty) REFERENCES produkty (id_produkty) ON DELETE SET NULL)";
         
         String createKonto = "CREATE TABLE IF NOT EXISTS konto "
         		+ "(id_konto int,"
         		+ "kwota decimal(32,2),"
         		+ "nazwisko varchar(255) NOT NULL,"
-        		+ "FOREIGN KEY (id_konto) REFERENCES klienci (id_konto) ON UPDATE SET NULL)";
+        		+ "FOREIGN KEY (id_konto) REFERENCES klienci (id_konto) ON DELETE SET NULL)";
         try {
         	SQLite.stat.execute(createKlienci);
         	SQLite.stat.execute(createProdukty);

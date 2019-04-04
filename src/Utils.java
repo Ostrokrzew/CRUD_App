@@ -10,8 +10,54 @@ public class Utils {
 		Konto.accountTable.setItems(ShowMeDB.showKonto());
 		Konto.accountTable.refresh();
 	}
-	public static String getInfo() {
-		 String info = Klienci.clientTable.getSelectionModel().getSelectedCells().toString();
-		 return info;
+	
+	public static String getRowKlienciId() {
+		try {
+			int row = Klienci.clientTable.getSelectionModel().getSelectedItem().getId_klienci();
+			String id = Integer.toString(row);
+			return id;
+		} catch (NullPointerException e) {
+			return "0";
+		}
+	}
+	
+	public static String getRowKlienciKon() {
+		try {
+			int row = Klienci.clientTable.getSelectionModel().getSelectedItem().getId_konto();
+			String id = Integer.toString(row);
+			return id;
+		} catch (NullPointerException e) {
+			return "0";
+		}
+	}
+	
+	public static String getRowProdukty() {
+		try {
+			int row = Produkty.productsTable.getSelectionModel().getSelectedItem().getId_produkty();
+			String id = Integer.toString(row);
+			return id;
+		} catch (NullPointerException e) {
+			return "0";
+		}
+	}
+	
+	public static String getRowZakupy() {
+		try {
+			int row = Zakupy.transactionTable.getSelectionModel().getSelectedItem().getId_zakupy();
+			String id = Integer.toString(row);
+			return id;
+		} catch (NullPointerException e) {
+			return "0";
+		}
+	}
+	
+	public static String getRowKonta() {
+		try {
+			int row = Konto.accountTable.getSelectionModel().getSelectedItem().getId_konto();
+			String id = Integer.toString(row);
+			return id;
+		} catch (NullPointerException e) {
+			return "0";
+		}
 	}
 }

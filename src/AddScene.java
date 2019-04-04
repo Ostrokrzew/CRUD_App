@@ -15,12 +15,14 @@ import javafx.scene.layout.HBox;
 public class AddScene implements EventHandler<ActionEvent> {
 	
 	Button wstecz, add0, add1, add2, add3;
+	
 	TableView<Klienci> clientTable;
 	TableView<Produkty> productsTable;
 	TableView<Zakupy> transactionTable;
 	TableView<Konto> accountTable;
+	
 	TextField client0, client1, client2, product0, product1, product2, trans0, trans1, trans2, account0, account1, account2;
-	private String imie, nazwisko, id_konto, message, id_produkty, nazwa, cena, kwota, id_klienci, data_zakupy;
+	private String imie, nazwisko, id_konto, message, id_produkty, nazwa, cena, kwota, data_zakupy;
 	
 	public Scene scene() {
 		
@@ -65,7 +67,7 @@ public class AddScene implements EventHandler<ActionEvent> {
 		product2.setMaxWidth(128);
 		
 		trans0 = new TextField();
-		trans0.setPromptText("Nr Klienta");
+		trans0.setPromptText("Nr konta");
 		trans0.setMaxWidth(128);
 		
 		trans1 = new TextField();
@@ -201,11 +203,11 @@ public class AddScene implements EventHandler<ActionEvent> {
 			boolean okey = false;
 			try {
 				int id = Integer.parseInt(trans0.getText());
-				id_klienci = Integer.toString(id);
+				id_konto = Integer.toString(id);
 				okey = true;
 			} catch(NumberFormatException e) {
 				PopUp konto = new PopUp();
-				konto.popUp("B³¹d", "B³êdny numer klienta.\nSpróbuj jeszcze raz.", false);
+				konto.popUp("B³¹d", "B³êdny numer konta.\nSpróbuj jeszcze raz.", false);
 				okey = false;
 			}
 			try {
@@ -228,7 +230,7 @@ public class AddScene implements EventHandler<ActionEvent> {
 				okey = false;
 			}
 			if (okey == true) {
-				message = Add.addTransaction(id_klienci, id_produkty, data_zakupy);
+				message = Add.addTransaction(id_konto, id_produkty, data_zakupy);
 				PopUp konto = new PopUp();
 				konto.popUp("Info", message, false);
 			}

@@ -1,20 +1,25 @@
 import java.sql.Date;
+
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class Zakupy {
 	
 	private int id_zakupy;
-	private int id_klienci;
+	private int id_konto;
 	private int id_produkty;
 	private Date data_zakupy;
 	
 	static TableView<Zakupy> transactionTable;
 
-	public Zakupy(int id_zakupy, int id_klienci, int id_produkty, Date data_zakupy) {
+	public Zakupy(int id_zakupy, int id_konto, int id_produkty, Date data_zakupy) {
 		this.setId_zakupy(id_zakupy);
-		this.setId_klienci(id_klienci);
+		this.setId_konto(id_konto);
 		this.setId_produkty(id_produkty);
 		this.setData_zakupy(data_zakupy);
 	}
@@ -27,14 +32,14 @@ public class Zakupy {
 		this.id_zakupy = id_zakupy;
 	}
 
-	public int getId_klienci() {
-		return id_klienci;
+	public int getId_konto() {
+		return id_konto;
 	}
 
-	public void setId_klienci(int id_klienci) {
-		this.id_klienci = id_klienci;
+	public void setId_konto(int id_konto) {
+		this.id_konto = id_konto;
 	}
-
+	
 	public int getId_produkty() {
 		return id_produkty;
 	}
@@ -51,19 +56,28 @@ public class Zakupy {
 		this.data_zakupy = data_zakupy;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static TableView<Zakupy> transactionTable() {
 		
-		TableColumn<Zakupy, Integer> zakupyIdCol = new TableColumn<>("LP");
-		zakupyIdCol.setPrefWidth(64);
-		zakupyIdCol.setCellValueFactory(new PropertyValueFactory<>("id_zakupy"));
+		//autoincrementing column
+		TableColumn zakupyIdCol = new TableColumn("LP");
+		zakupyIdCol.setCellValueFactory(new Callback<CellDataFeatures<Zakupy, String>, ObservableValue<String>>() {
+		  @Override public ObservableValue<String> call(CellDataFeatures<Zakupy, String> p) {
+		    return new ReadOnlyObjectWrapper(transactionTable.getItems().indexOf(p.getValue())+1 + "");
+		  }
+		});   
+		zakupyIdCol.setSortable(false);
 		
-		TableColumn<Zakupy, Integer> zakupyIdClientCol = new TableColumn<>("Nr klienta");
-		zakupyIdClientCol.setPrefWidth(64);
-		zakupyIdClientCol.setCellValueFactory(new PropertyValueFactory<>("id_klienci"));
+//		TableColumn<Zakupy, Integer> zakupyIdCol = new TableColumn<>("LP");
+//		zakupyIdCol.setPrefWidth(64);
+//		zakupyIdCol.setCellValueFactory(new PropertyValueFactory<>("id_zakupy"));
+		
+		TableColumn<Zakupy, Integer> zakupyIdClientCol = new TableColumn<>("Nr konta");
+		zakupyIdClientCol.setPrefWidth(100);
+		zakupyIdClientCol.setCellValueFactory(new PropertyValueFactory<>("id_konto"));
 		
 		TableColumn<Zakupy, Integer> zakupyIdProductCol = new TableColumn<>("Kod produktu");
-		zakupyIdProductCol.setPrefWidth(192);
+		zakupyIdProductCol.setPrefWidth(206);
 		zakupyIdProductCol.setCellValueFactory(new PropertyValueFactory<>("id_produkty"));
 		
 		TableColumn<Zakupy, Date> zakupyDateCol = new TableColumn<>("Data zakupu");

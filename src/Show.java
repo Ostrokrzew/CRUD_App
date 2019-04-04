@@ -1,57 +1,89 @@
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 public class Show {
 	/*This class contains method that shows chosen record*/
 	
 	//showing chosen record
-	public static String select(String table, String id_name, String id_value) {
-		String show = String.format("SELECT * FROM %s WHERE %s == %s", table, id_name, id_value);
-        try {
-            SQLite.stat.execute(show);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "B³¹d przy wybieraniu rekordów.";
-        }
-        return "Rekord pokazano pomyœlnie.";
+	public static String selectClient(String id_value) {
+		String klient = "";
+		try {
+			ResultSet result = SQLite.stat.executeQuery("SELECT * FROM klienci WHERE id_klienci == "+id_value);
+			while(result.next()) {
+				int id_konto = result.getInt("id_konto");
+				String imie = result.getString("imie");
+				String nazwisko = result.getString("nazwisko");
+				String konto = Integer.toString(id_konto);
+				klient = imie+","+nazwisko+","+konto;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return klient;
 	}
-}
-
-/*	unnecessary code
-	public static void printAll() {
-		System.out.println("Klienci\n");
-		ShowMeDB.showKlienci();
-		System.out.println("\nProdukty\n");
-		ShowMeDB.showProdukty();
-		System.out.println("\nZakupy\n");
-		ShowMeDB.showZakupy();
-		System.out.println("\nKonta\n");
-		ShowMeDB.showKonto();
-	}
-
-    public static void showClient(String numer) {
-        List<String> klient = new ArrayList<String>();
-        try {
-        	String vrbl = String.format("SELECT * FROM klienci WHERE id_klienci = '%s'", numer);
-            ResultSet result = SQLite.stat.executeQuery(vrbl);
+	
+	public static String selectProduct(String id_value) {
+    	String produkt = "";
+    	try {
+            ResultSet result = SQLite.stat.executeQuery("SELECT * FROM produkty WHERE id_p == "+id_value);
             while(result.next()) {
-                int id_klienci = result.getInt("id_klienci");
-                int id_konto = result.getInt("id_konto");
-                String imie = result.getString("imie");
-                String nazwisko = result.getString("nazwisko");
-                String id_klienta = Integer.toString(id_klienci);
-                String id_konta = Integer.toString(id_konto);
-                klient.add("numer klienta: " + id_klienta);
-                klient.add("imiê: " + imie);
-                klient.add("nazwisko: " + nazwisko);
-                klient.add("numer konta: " + id_konta);
-                klient.add("\n");
+                String nazwa = result.getString("nazwa");
+                double cena = result.getDouble("cena");
+                int id_produkty = result.getInt("id_produkty");
+                String cenka = Double.toString(cena);
+                String prod = Integer.toString(id_produkty);
+                produkt = nazwa+","+cenka+","+prod;
             }
         } catch (SQLException e) {
-        	System.out.println("Nie ma takiego klienta.");
             e.printStackTrace();
+            return null;
         }
-        for (int i=0;i<klient.size();i++)
-        	System.out.println(klient.get(i));
+        return produkt;
+    }
+	
+	public static String selectTransaction(String id_value) {
+    	String zakup = "";
+        try {
+            ResultSet result = SQLite.stat.executeQuery("SELECT * FROM zakupy"
+            		+ " INNER JOIN klienci ON zakupy.id_konto = klienci.id_konto"
+            		+ " INNER JOIN produkty ON zakupy.id_produkty = produkty.id_produkty"
+            		+ " WHERE id_zakupy == "+id_value);
+            while(result.next()) {
+                int id_konto = result.getInt("id_konto");
+                int id_produkty = result.getInt("id_produkty");
+                Date data_zakupy = result.getDate("data_zakupy");
+                String konto = Integer.toString(id_konto);
+                String produkt = Integer.toString(id_produkty);
+				SimpleDateFormat dateForm = new SimpleDateFormat("yyyy-MM-dd");
+                String data = dateForm.format(data_zakupy);
+                zakup = konto+","+produkt+","+data;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return zakup;
+    }
+	
+	public static String selectAccount(String id_value) {
+    	String konto = "";
+        try {
+            ResultSet result = SQLite.stat.executeQuery("SELECT * FROM konto"
+            		+ " INNER JOIN klienci ON konto.id_konto = klienci.id_konto"
+            		+ " WHERE id_konto == "+id_value);
+            while(result.next()) {
+                String nazwisko = result.getString("nazwisko");
+                double kwota = result.getDouble("kwota");
+                String saldo = Double.toString(kwota);
+                konto = nazwisko+","+saldo;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return konto;
     }
 }
-*/

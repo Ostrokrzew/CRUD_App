@@ -1,6 +1,10 @@
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class Produkty {
 	
@@ -57,12 +61,20 @@ public class Produkty {
 		this.id_produkty = id_produkty;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes", "unlikely-arg-type"})
 	public static TableView<Produkty> productsTable() {
 		
-		TableColumn<Produkty, Integer> produktyIdCol = new TableColumn<>("LP");
-		produktyIdCol.setPrefWidth(64);
-		produktyIdCol.setCellValueFactory(new PropertyValueFactory<>("id_p"));
+		TableColumn produktyIdCol = new TableColumn("LP");
+		produktyIdCol.setCellValueFactory(new Callback<CellDataFeatures<Konto, String>, ObservableValue<String>>() {
+		@Override public ObservableValue<String> call(CellDataFeatures<Konto, String> p) {
+		    return new ReadOnlyObjectWrapper(productsTable.getItems().indexOf(p.getValue())+1 + "");
+		  }
+		});   
+		produktyIdCol.setSortable(false);
+		
+//		TableColumn<Produkty, Integer> produktyIdCol = new TableColumn<>("LP");
+//		produktyIdCol.setPrefWidth(64);
+//		produktyIdCol.setCellValueFactory(new PropertyValueFactory<>("id_p"));
 		
 		TableColumn<Produkty, String> produktyNameCol = new TableColumn<>("Nazwa");
 		produktyNameCol.setPrefWidth(192);
@@ -73,7 +85,7 @@ public class Produkty {
 		produktyPriceCol.setCellValueFactory(new PropertyValueFactory<>("cena"));
 		
 		TableColumn<Produkty, Integer> produktyNumberCol = new TableColumn<>("Kod produktu");
-		produktyNumberCol.setPrefWidth(128);
+		produktyNumberCol.setPrefWidth(156);
 		produktyNumberCol.setCellValueFactory(new PropertyValueFactory<>("id_produkty"));
 	
 		productsTable = new TableView<>();

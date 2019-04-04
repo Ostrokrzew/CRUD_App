@@ -1,6 +1,10 @@
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class Konto {
 
@@ -40,8 +44,17 @@ public class Konto {
 		this.nazwisko = nazwisko;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static TableView<Konto> accountTable() {
+		
+		//autoincrementing column
+		TableColumn kontoNoCol = new TableColumn("LP");
+		kontoNoCol.setCellValueFactory(new Callback<CellDataFeatures<Konto, String>, ObservableValue<String>>() {
+		  @Override public ObservableValue<String> call(CellDataFeatures<Konto, String> p) {
+		    return new ReadOnlyObjectWrapper(accountTable.getItems().indexOf(p.getValue())+1 + "");
+		  }
+		});   
+		kontoNoCol.setSortable(false);
 		
 		TableColumn<Konto, Integer> kontoIdCol = new TableColumn<>("Nr konta");
 		kontoIdCol.setPrefWidth(108);
@@ -52,14 +65,14 @@ public class Konto {
 		kontoClientSurameCol.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
 		
 		TableColumn<Konto, Double> produktyAmountCol = new TableColumn<>("Saldo");
-		produktyAmountCol.setPrefWidth(234);
+		produktyAmountCol.setPrefWidth(198);
 		produktyAmountCol.setCellValueFactory(new PropertyValueFactory<>("kwota"));
 
 	
 		accountTable = new TableView<>();
 		accountTable.setItems(ShowMeDB.showKonto());
 		accountTable.setPrefWidth(578);
-		accountTable.getColumns().addAll(kontoIdCol, kontoClientSurameCol, produktyAmountCol);
+		accountTable.getColumns().addAll(kontoNoCol, kontoIdCol, kontoClientSurameCol, produktyAmountCol);
 		
 		return accountTable;
 	}
