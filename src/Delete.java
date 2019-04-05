@@ -4,21 +4,7 @@ public class Delete {
 	/*This class contains method that deletes chosen record*/
 	
 	public static String deleteClient(String id, String kon) {
-        String delete = String.format("DELETE FROM zakupy WHERE id_konto == %s", kon);
-        try {
-            SQLite.stat.execute(delete);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "B³¹d przy usuwaniu klienta.";
-        }
-        delete = String.format("DELETE FROM konto WHERE id_konto == %s", kon);
-        try {
-            SQLite.stat.execute(delete);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "B³¹d przy usuwaniu klienta.";
-        }
-        delete = String.format("DELETE FROM klienci WHERE id_klienci == %s", id);
+        String delete = String.format("DELETE FROM klienci WHERE id_klienci == %s", id);
         try {
             SQLite.stat.execute(delete);
         } catch (SQLException e) {
@@ -29,14 +15,7 @@ public class Delete {
 	}
 	
 	public static String deleteProduct(String param) {
-        String delete = String.format("DELETE FROM zakupy WHERE id_produkty == %s", param);
-        try {
-            SQLite.stat.execute(delete);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "B³¹d przy usuwaniu produktu.";
-        }
-        delete = String.format("DELETE FROM produkty WHERE id_produkty == %s", param);
+        String delete = String.format("DELETE FROM produkty WHERE id_produkty == %s", param);
         try {
             SQLite.stat.execute(delete);
         } catch (SQLException e) {

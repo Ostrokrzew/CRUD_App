@@ -73,7 +73,7 @@ public class Show {
         try {
             ResultSet result = SQLite.stat.executeQuery("SELECT * FROM konto"
             		+ " INNER JOIN klienci ON konto.id_konto = klienci.id_konto"
-            		+ " WHERE id_konto == "+id_value);
+            		+ " WHERE id_k == "+id_value);
             while(result.next()) {
                 String nazwisko = result.getString("nazwisko");
                 double kwota = result.getDouble("kwota");

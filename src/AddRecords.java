@@ -67,9 +67,9 @@ public class AddRecords {
 	    try {
 	    	vrbl="INSERT INTO konto (id_konto, kwota, nazwisko) VALUES (12113, 2137.00, 'Wawe³');";
 	    	SQLite.stat.execute(vrbl);
-	    	vrbl="INSERT INTO konto (id_konto, kwota, nazwisko) VALUES (20001, 1488.00, 'Polacki');";
+	    	vrbl="INSERT INTO konto (id_konto, kwota, nazwisko) VALUES (20001, 1488.00, 'Maj');";
 	    	SQLite.stat.execute(vrbl);
-	    	vrbl="INSERT INTO konto (id_konto, kwota, nazwisko) VALUES (30322, 1000000.00, 'Maj');";
+	    	vrbl="INSERT INTO konto (id_konto, kwota, nazwisko) VALUES (30322, 1000000.00, 'Polacki');";
 	    	SQLite.stat.execute(vrbl);
 	    	vrbl="INSERT INTO konto (id_konto, kwota, nazwisko) VALUES (16154, 912.50, 'Wawe³');";
 	    	SQLite.stat.execute(vrbl);

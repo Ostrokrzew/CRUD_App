@@ -147,10 +147,10 @@ public class AddScene implements EventHandler<ActionEvent> {
 		}
 		else if(event.getSource() == add0) {
 			boolean okey = false;
-			imie = client0.getText();
-			nazwisko = client1.getText();
+			imie = client0.getText().trim();
+			nazwisko = client1.getText().trim();
 			try {
-				int id = Integer.parseInt(client2.getText());
+				int id = Integer.parseInt(client2.getText().trim());
 				id_konto = Integer.toString(id);
 				okey = true;
 			} catch(NumberFormatException e) {
@@ -170,9 +170,9 @@ public class AddScene implements EventHandler<ActionEvent> {
 		}
 		else if(event.getSource() == add1) {
 			boolean okey = false;
-			nazwa = product0.getText();
+			nazwa = product0.getText().trim();
 			try {
-				double price = Double.parseDouble(product1.getText());
+				double price = Double.parseDouble(product1.getText().trim());
 				cena = Double.toString(price);
 				okey = true;
 			} catch(NumberFormatException e) {
@@ -181,7 +181,7 @@ public class AddScene implements EventHandler<ActionEvent> {
 				okey = false;
 			}
 			try {
-				int id = Integer.parseInt(product2.getText());
+				int id = Integer.parseInt(product2.getText().trim());
 				id_produkty = Integer.toString(id);
 				okey = true;
 			} catch(NumberFormatException e) {
@@ -202,7 +202,7 @@ public class AddScene implements EventHandler<ActionEvent> {
 		else if(event.getSource() == add2) {
 			boolean okey = false;
 			try {
-				int id = Integer.parseInt(trans0.getText());
+				int id = Integer.parseInt(trans0.getText().trim());
 				id_konto = Integer.toString(id);
 				okey = true;
 			} catch(NumberFormatException e) {
@@ -211,7 +211,7 @@ public class AddScene implements EventHandler<ActionEvent> {
 				okey = false;
 			}
 			try {
-				int id = Integer.parseInt(trans1.getText());
+				int id = Integer.parseInt(trans1.getText().trim());
 				id_produkty = Integer.toString(id);
 				okey = true;
 			} catch(NumberFormatException e) {
@@ -221,7 +221,7 @@ public class AddScene implements EventHandler<ActionEvent> {
 			}
 			try {
 				SimpleDateFormat dateForm = new SimpleDateFormat("yyyy-MM-dd");
-				Date date = dateForm.parse(trans2.getText()); 
+				Date date = dateForm.parse(trans2.getText().trim()); 
 				data_zakupy = dateForm.format(date) + " 00:00:00.000";
 				okey = true;
 			} catch(ParseException e) {
@@ -241,9 +241,9 @@ public class AddScene implements EventHandler<ActionEvent> {
 		}
 		else if(event.getSource() == add3) {
 			boolean okey = false;
-			nazwisko = account1.getText();
+			nazwisko = account1.getText().trim();
 			try {
-				int id = Integer.parseInt(account0.getText());
+				int id = Integer.parseInt(account0.getText().trim());
 				id_konto = Integer.toString(id);
 				okey = true;
 			} catch(NumberFormatException e) {
@@ -252,7 +252,7 @@ public class AddScene implements EventHandler<ActionEvent> {
 				okey = false;
 				}
 			try {
-				double sum = Double.parseDouble(account2.getText());
+				double sum = Double.parseDouble(account2.getText().trim());
 				kwota = Double.toString(sum);
 				okey = true;
 			} catch(NumberFormatException e) {

@@ -146,18 +146,18 @@ public class ModScene implements EventHandler<ActionEvent> {
 					boolean okey = false;
 					if (test == "Imiê") {
 						column = "imie";
-						value = client0.getText();
+						value = client0.getText().trim();
 						okey = true;
 					}
 					else if (test == "Nazwisko") {
 						column = "nazwisko";
-						value = client0.getText();
+						value = client0.getText().trim();
 						okey = true;
 					}
 					else if (test == "Nr konta") {
 						column = "id_konto";
 						try {
-							int temp = Integer.parseInt(client0.getText());
+							int temp = Integer.parseInt(client0.getText().trim());
 							value = Integer.toString(temp);
 							okey = true;
 						} catch(NumberFormatException e) {
@@ -191,7 +191,7 @@ public class ModScene implements EventHandler<ActionEvent> {
 					if (test == "Kod produktu") {
 						column = "id_produkty";
 						try {
-							int temp = Integer.parseInt(product0.getText());
+							int temp = Integer.parseInt(product0.getText().trim());
 							value = Integer.toString(temp);
 							okey = true;
 						} catch(NumberFormatException e) {
@@ -202,13 +202,13 @@ public class ModScene implements EventHandler<ActionEvent> {
 					}
 					else if (test == "Nazwa") {
 						column = "nazwa";
-						value = product0.getText();
+						value = product0.getText().trim();
 						okey = true;
 					}
 					else if (test == "Cena") {
 						column = "cena";
 						try {
-							double temp = Double.parseDouble(product0.getText());
+							double temp = Double.parseDouble(product0.getText().trim());
 							value = Double.toString(temp);
 							okey = true;
 						} catch(NumberFormatException e) {
@@ -242,7 +242,7 @@ public class ModScene implements EventHandler<ActionEvent> {
 					if (test == "Nr konta") {
 						column = "id_konto";
 						try {
-							int temp = Integer.parseInt(trans0.getText());
+							int temp = Integer.parseInt(trans0.getText().trim());
 							value = Integer.toString(temp);
 							okey = true;
 						} catch(NumberFormatException e) {
@@ -254,7 +254,7 @@ public class ModScene implements EventHandler<ActionEvent> {
 					if (test == "Kod produktu") {
 						column = "id_produkty";
 						try {
-							int temp = Integer.parseInt(trans0.getText());
+							int temp = Integer.parseInt(trans0.getText().trim());
 							value = Integer.toString(temp);
 							okey = true;
 						} catch(NumberFormatException e) {
@@ -267,7 +267,7 @@ public class ModScene implements EventHandler<ActionEvent> {
 						column = "data_zakupy";
 						try {
 							SimpleDateFormat dateForm = new SimpleDateFormat("yyyy-MM-dd");
-							Date date = dateForm.parse(trans0.getText()); 
+							Date date = dateForm.parse(trans0.getText().trim()); 
 							value = dateForm.format(date) + " 00:00:00.000";
 							okey = true;
 						} catch(ParseException e) {
@@ -301,7 +301,7 @@ public class ModScene implements EventHandler<ActionEvent> {
 					if (test == "Nr konta") {
 						column = "id_konto";
 						try {
-							int temp = Integer.parseInt(account0.getText());
+							int temp = Integer.parseInt(account0.getText().trim());
 							value = Integer.toString(temp);
 							okey = true;
 						} catch(NumberFormatException e) {
@@ -313,7 +313,7 @@ public class ModScene implements EventHandler<ActionEvent> {
 					if (test == "Saldo") {
 						column = "kwota";
 						try {
-							double temp = Double.parseDouble(account0.getText());
+							double temp = Double.parseDouble(account0.getText().trim());
 							value = Double.toString(temp);
 							okey = true;
 						} catch(NumberFormatException e) {
@@ -324,7 +324,7 @@ public class ModScene implements EventHandler<ActionEvent> {
 					}
 					else if (test == "Nazwisko") {
 						column = "nazwisko";
-						value = account0.getText();
+						value = account0.getText().trim();
 						okey = true;
 					}
 					if (okey == true) {

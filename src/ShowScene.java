@@ -28,15 +28,19 @@ public class ShowScene implements EventHandler<ActionEvent> {
 		
 		clientTable = Klienci.clientTable();
 		GridPane.setConstraints(clientTable, 0, 0);
+		clientTable.setSortPolicy(null);
 		
 		productsTable = Produkty.productsTable();
 		GridPane.setConstraints(productsTable, 0, 2);
+		productsTable.setSortPolicy(null);
 		
 		transactionTable = Zakupy.transactionTable();
 		GridPane.setConstraints(transactionTable, 2, 0);
+		transactionTable.setSortPolicy(null);
 		
 		accountTable = Konto.accountTable();
 		GridPane.setConstraints(accountTable, 2, 2);
+		accountTable.setSortPolicy(null);
 		
 		wstecz = new Button("wstecz");
 		wstecz.setOnAction(this);
