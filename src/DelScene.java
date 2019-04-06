@@ -88,6 +88,7 @@ public class DelScene implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		if(event.getSource() == wstecz) {
+			Utils.refresh();
 			WindowForm.mainStage.setScene(WindowForm.mainScene.scene());
 			WindowForm.mainStage.setTitle("Obs硊ga bazy danych sklepu \"Pope'seye\"");
 			WindowForm.mainStage.show();
@@ -100,11 +101,11 @@ public class DelScene implements EventHandler<ActionEvent> {
 					kon = Utils.getRowKlienciKon();
 					Delete.deleteClient(id, kon);
 				}
-				Utils.refresh();
 			}
 			else {
 				alertDel.popUp("B彻d", "Zaznacz wiersz, kt髍y chcesz usun规.", false);
 			}
+			Utils.refresh();
 		}
 		else if(event.getSource() == delete1) {
 			if (Utils.getRowProdukty() != "0") {
@@ -113,11 +114,11 @@ public class DelScene implements EventHandler<ActionEvent> {
 				param = Utils.getRowProdukty();
 				Delete.deleteProduct(param);
 			}
-			Utils.refresh();
 			}
 			else {
 				alertDel.popUp("B彻d", "Zaznacz wiersz, kt髍y chcesz usun规.", false);
 			}
+			Utils.refresh();
 		}
 		else if(event.getSource() == delete2) {
 			if (Utils.getRowZakupy() != "0") {
@@ -126,11 +127,11 @@ public class DelScene implements EventHandler<ActionEvent> {
 					param = Utils.getRowZakupy();
 					Delete.deleteTransaction(param);
 				}
-				Utils.refresh();
 			}
 			else {
 				alertDel.popUp("B彻d", "Zaznacz wiersz, kt髍y chcesz usun规.", false);
 			}
+			Utils.refresh();
 		}
 		else if(event.getSource() == delete3) {
 			if (Utils.getRowKonta() != "0") {
@@ -139,11 +140,11 @@ public class DelScene implements EventHandler<ActionEvent> {
 					param = Utils.getRowKonta();
 					Delete.deleteAccount(param);
 				}
-				Utils.refresh();
 			}
 			else {
 				alertDel.popUp("B彻d", "Zaznacz wiersz, kt髍y chcesz usun规.", false);
 			}
+			Utils.refresh();
 		}
 	}
 }

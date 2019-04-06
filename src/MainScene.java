@@ -16,7 +16,7 @@ public class MainScene implements EventHandler<ActionEvent> {
 	
 	public Scene scene() {
 		
-		if (database == "") {
+		if (database == null || database == "") {
 			done = false;
 		}
 		
@@ -101,6 +101,7 @@ public class MainScene implements EventHandler<ActionEvent> {
 		}
 		else if(event.getSource() == insert) {
 			if (done == false) {
+				InitiateDB.createTables();
 				SQLite.exampleRecordsInput();
 				alertInit = new PopUp();
 				alertInit.popUp("Inicjacja", "Pomyœlnie zainicjowano bazê danych.", false);

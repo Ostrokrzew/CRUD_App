@@ -164,6 +164,7 @@ public class ShowScene implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 		if(event.getSource() == wstecz) {
 			Utils.flushBoxes();
+			Utils.refresh();
 			WindowForm.mainStage.setScene(WindowForm.mainScene.scene());
 			WindowForm.mainStage.setTitle("Obs³uga bazy danych sklepu \"Pope'seye\"");
 			WindowForm.mainStage.show();

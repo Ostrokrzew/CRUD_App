@@ -148,6 +148,7 @@ public class ModScene implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 		if(event.getSource() == wstecz) {
 			Utils.flushBoxes();
+			Utils.refresh();
 			WindowForm.mainStage.setScene(WindowForm.mainScene.scene());
 			WindowForm.mainStage.setTitle("Obs³uga bazy danych sklepu \"Pope'seye\"");
 			WindowForm.mainStage.show();
@@ -177,17 +178,15 @@ public class ModScene implements EventHandler<ActionEvent> {
 					PopUp konto = new PopUp();
 					konto.popUp("Info", message, false);
 				}
-				client0.clear();
-				client1.clear();
-				client2.clear();
-				Utils.refresh();
-				Utils.flushBoxes();
-				Utils.fillBoxesMod();
+
 			}
 			else {
 				PopUp konto = new PopUp();
 				konto.popUp("B³¹d", "Zaznacz wiersz, w którym chcesz dokonaæ zmian.", false);
 			}
+			Utils.refresh();
+			Utils.flushBoxes();
+			Utils.fillBoxesMod();
 		}
 		else if(event.getSource() == update1) {
 			if (Utils.getRowProdukty() != "0") {
@@ -214,17 +213,15 @@ public class ModScene implements EventHandler<ActionEvent> {
 					PopUp konto = new PopUp();
 					konto.popUp("Info", message, false);
 				}
-				product0.clear();
-				product1.clear();
-				product2.clear();
-				Utils.refresh();
-				Utils.flushBoxes();
-				Utils.fillBoxesMod();
+
 			}
 			else {
 				PopUp konto = new PopUp();
 				konto.popUp("B³¹d", "Zaznacz wiersz, w którym chcesz dokonaæ zmian.", false);
 			}
+			Utils.refresh();
+			Utils.flushBoxes();
+			Utils.fillBoxesMod();
 		}
 		else if(event.getSource() == update2) {
 			if (Utils.getRowZakupy() != "0") {
@@ -243,17 +240,15 @@ public class ModScene implements EventHandler<ActionEvent> {
 					PopUp konto = new PopUp();
 					konto.popUp("Info", message, false);
 				}
-				trans0.setValue(null);
-				trans1.setValue(null);
-				trans2.setValue(null);
-				Utils.refresh();
-				Utils.flushBoxes();
-				Utils.fillBoxesMod();
+
 			}
 			else {
 				PopUp konto = new PopUp();
 				konto.popUp("B³¹d", "Zaznacz wiersz, w którym chcesz dokonaæ zmian.", false);
 			}
+			Utils.refresh();
+			Utils.flushBoxes();
+			Utils.fillBoxesMod();
 		}
 		else if(event.getSource() == update3) {
 			if (Utils.getRowKonta() != "0") {
@@ -279,18 +274,15 @@ public class ModScene implements EventHandler<ActionEvent> {
 					PopUp konto = new PopUp();
 					konto.popUp("Info", message, false);
 				}
-				account0.setValue(null);
-				account1.setValue(null);
-				account2.clear();
-				Utils.refresh();
-				Utils.flushBoxes();
-				Utils.fillBoxesMod();
 				}
 			}
 			else {
 				PopUp konto = new PopUp();
 				konto.popUp("B³¹d", "Zaznacz wiersz, w którym chcesz dokonaæ zmian.", false);
 			}
+			Utils.refresh();
+			Utils.flushBoxes();
+			Utils.fillBoxesMod();
 		}
 	}
 }
