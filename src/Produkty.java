@@ -1,5 +1,7 @@
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -8,6 +10,9 @@ import javafx.util.Callback;
 
 public class Produkty {
 	
+	public static ObservableList<Integer> avaliableProducts = FXCollections.observableArrayList();
+	public static ObservableList<Integer> avaliableIds = FXCollections.observableArrayList();
+
 	private int id_p;
 	private String nazwa;
 	private double cena;
@@ -61,20 +66,21 @@ public class Produkty {
 		this.id_produkty = id_produkty;
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes", "unlikely-arg-type"})
+	@SuppressWarnings({ "unchecked", "rawtypes"})
 	public static TableView<Produkty> productsTable() {
 		
 		TableColumn produktyIdCol = new TableColumn("LP");
-		produktyIdCol.setCellValueFactory(new Callback<CellDataFeatures<Konto, String>, ObservableValue<String>>() {
-		@Override public ObservableValue<String> call(CellDataFeatures<Konto, String> p) {
+		produktyIdCol.setCellValueFactory(new Callback<CellDataFeatures<Produkty, String>, ObservableValue<String>>() {
+		@Override public ObservableValue<String> call(CellDataFeatures<Produkty, String> p) {
 		    return new ReadOnlyObjectWrapper(productsTable.getItems().indexOf(p.getValue())+1 + "");
 		  }
 		});   
 		produktyIdCol.setSortable(false);
 		
-//		TableColumn<Produkty, Integer> produktyIdCol = new TableColumn<>("LP");
-//		produktyIdCol.setPrefWidth(64);
-//		produktyIdCol.setCellValueFactory(new PropertyValueFactory<>("id_p"));
+		TableColumn<Produkty, Integer> produktyCol = new TableColumn<>("LP");
+		produktyCol.setPrefWidth(64);
+		produktyCol.setCellValueFactory(new PropertyValueFactory<>("id_p"));
+		produktyCol.setVisible(false);
 		
 		TableColumn<Produkty, String> produktyNameCol = new TableColumn<>("Nazwa");
 		produktyNameCol.setPrefWidth(192);
@@ -91,7 +97,7 @@ public class Produkty {
 		productsTable = new TableView<>();
 		productsTable.setItems(ShowMeDB.showProdukty());
 		productsTable.setPrefWidth(578);
-		productsTable.getColumns().addAll(produktyIdCol, produktyNameCol, produktyPriceCol, produktyNumberCol);
+		productsTable.getColumns().addAll(produktyIdCol, produktyCol, produktyNameCol, produktyPriceCol, produktyNumberCol);
 		
 		return productsTable;
 	}

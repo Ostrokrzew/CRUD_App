@@ -10,7 +10,7 @@ public class Add {
             SQLite.stat.execute(add);
         } catch (SQLException e) {
             e.printStackTrace();
-            return "B≥πd przy dodawaniu klienta.\nSprawdü numer konta";
+            return "B≥πd przy dodawaniu klienta.";
         }
         return "Klienta dodano pomyúlnie.";
 	}
@@ -22,7 +22,7 @@ public class Add {
             SQLite.stat.execute(add);
         } catch (SQLException e) {
             e.printStackTrace();
-            return "B≥πd przy dodawaniu produktu.\nKod produktu juø wystπpi≥ w bazie danych.";
+            return "B≥πd przy dodawaniu produktu.";
         }
         return "Produkt dodano pomyúlnie.";
 	}

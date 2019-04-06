@@ -1,5 +1,7 @@
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -7,6 +9,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 public class Klienci {
+	
+	public static ObservableList<Integer> avaliableAccounts = FXCollections.observableArrayList();
+	public static ObservableList<String> avaliableSurnames = FXCollections.observableArrayList();
+	public static ObservableList<Integer> availableIds = FXCollections.observableArrayList();
 	
 	private int id_klienci;
 	private String imie;
@@ -65,10 +71,11 @@ public class Klienci {
 		});   
 		klienciIdCol.setSortable(false);
 		
-//		TableColumn<Klienci, Integer> klienciIdCol = new TableColumn<>("LP");
-//		klienciIdCol.setPrefWidth(64);
-//		klienciIdCol.setCellValueFactory(new PropertyValueFactory<>("id_klienci"));
-//		klienciIdCol.setId("id_klienci");
+		TableColumn<Klienci, Integer> klienciCol = new TableColumn<>("LP");
+		klienciCol.setPrefWidth(64);
+		klienciCol.setCellValueFactory(new PropertyValueFactory<>("id_klienci"));
+		klienciCol.setId("id_klienci");
+		klienciCol.setVisible(false);
 		
 		TableColumn<Klienci, String> klienciNameCol = new TableColumn<>("Imiê");
 		klienciNameCol.setPrefWidth(192);
@@ -88,7 +95,7 @@ public class Klienci {
 		clientTable = new TableView<>();
 		clientTable.setItems(ShowMeDB.showKlienci());
 		clientTable.setPrefWidth(578);
-		clientTable.getColumns().addAll(klienciIdCol, klienciNameCol, klienciSurnameCol, klienciAccountCol);
+		clientTable.getColumns().addAll(klienciIdCol, klienciCol, klienciNameCol, klienciSurnameCol, klienciAccountCol);
 		
 		return clientTable;
 	}

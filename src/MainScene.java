@@ -19,9 +19,6 @@ public class MainScene implements EventHandler<ActionEvent> {
 		if (database == "") {
 			done = false;
 		}
-		else {
-			done = true;
-		}
 		
 		insert = new Button("zainicjuj bazê danych i uzupe³nij j¹ domyœlnymi rekordami");
 		insert.setOnAction(this);
@@ -104,7 +101,6 @@ public class MainScene implements EventHandler<ActionEvent> {
 		}
 		else if(event.getSource() == insert) {
 			if (done == false) {
-				InitiateDB.createTables();
 				SQLite.exampleRecordsInput();
 				alertInit = new PopUp();
 				alertInit.popUp("Inicjacja", "Pomyœlnie zainicjowano bazê danych.", false);

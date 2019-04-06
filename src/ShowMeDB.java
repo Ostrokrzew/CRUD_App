@@ -69,10 +69,11 @@ public class ShowMeDB {
             ResultSet result = SQLite.stat.executeQuery("SELECT * FROM konto"
             		+ " INNER JOIN klienci ON konto.id_konto = klienci.id_konto");
             while(result.next()) {
+            	int id_k = result.getInt("id_k");
                 int id_konto = result.getInt("id_konto");
                 String nazwisko = result.getString("nazwisko");
                 double kwota = result.getDouble("kwota");
-                konto.add(new Konto(id_konto, nazwisko, kwota));
+                konto.add(new Konto(id_k, id_konto, nazwisko, kwota));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -22,7 +22,7 @@ public class InitiateDB {
         		+ "id_konto INTEGER,"
         		+ "id_produkty int,"
         		+ "data_zakupy TEXT,"
-        		+ "FOREIGN KEY (id_konto) REFERENCES klienci (id_konto) ON DELETE SET NULL ON UPDATE CASCADE,"
+        		+ "FOREIGN KEY (id_konto) REFERENCES klienci (id_konto) ON DELETE CASCADE ON UPDATE CASCADE,"
         		+ "FOREIGN KEY (id_produkty) REFERENCES produkty (id_produkty) ON DELETE CASCADE ON UPDATE CASCADE)";
         
         String createKonto = "CREATE TABLE IF NOT EXISTS konto "

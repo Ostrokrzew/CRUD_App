@@ -2,6 +2,8 @@ import java.sql.Date;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -14,6 +16,8 @@ public class Zakupy {
 	private int id_konto;
 	private int id_produkty;
 	private Date data_zakupy;
+	
+	public static ObservableList<Integer> availableIds = FXCollections.observableArrayList();
 	
 	static TableView<Zakupy> transactionTable;
 

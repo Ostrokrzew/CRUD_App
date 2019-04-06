@@ -15,12 +15,12 @@ public class ShowScene implements EventHandler<ActionEvent> {
 	Button wstecz;
 	PopUp alertMod;
 	
-	TableView<Klienci> clientTable;
-	TableView<Produkty> productsTable;
-	TableView<Zakupy> transactionTable;
-	TableView<Konto> accountTable;
+	static TableView<Klienci> clientTable;
+	static TableView<Produkty> productsTable;
+	static TableView<Zakupy> transactionTable;
+	static TableView<Konto> accountTable;
 	
-	TextField client0, client1, client2, product0, product1, product2, trans0, trans1, trans2, account1, account2;
+	TextField client0, client1, client2, product0, product1, product2, trans0, trans1, trans2, account0, account1, account2;
 	ChoiceBox<Integer> clientID, productID, transID, accountID;
 	private String toSplit, id_value;
 	
@@ -42,67 +42,72 @@ public class ShowScene implements EventHandler<ActionEvent> {
 		GridPane.setConstraints(accountTable, 2, 2);
 		accountTable.setSortPolicy(null);
 		
+		Utils.fillBoxesShow();
+		
 		wstecz = new Button("wstecz");
 		wstecz.setOnAction(this);
 		GridPane.setConstraints(wstecz, 1, 3);
 		
 		client0 = new TextField();
 		client0.setPromptText("Imiê");
-		client0.setMaxWidth(128);
+		client0.setPrefWidth(128);
 		
 		client1 = new TextField();
 		client1.setPromptText("Nazwisko");
-		client1.setMaxWidth(128);
+		client1.setPrefWidth(128);
 		
 		client2 = new TextField();
 		client2.setPromptText("Numer konta");
-		client2.setMaxWidth(128);
+		client2.setPrefWidth(128);
 		
 		product0 = new TextField();
 		product0.setPromptText("Nazwa");
-		product0.setMaxWidth(128);
+		product0.setPrefWidth(128);
 		
 		product1 = new TextField();
 		product1.setPromptText("Cena");
-		product1.setMaxWidth(128);
+		product1.setPrefWidth(128);
 		
 		product2 = new TextField();
 		product2.setPromptText("Kod produktu");
-		product2.setMaxWidth(128);
+		product2.setPrefWidth(128);
 		
 		trans0 = new TextField();
 		trans0.setPromptText("Nr konta");
-		trans0.setMaxWidth(128);
+		trans0.setPrefWidth(128);
 		
 		trans1 = new TextField();
 		trans1.setPromptText("Kod produktu");
-		trans1.setMaxWidth(128);
+		trans1.setPrefWidth(128);
 		
 		trans2 = new TextField();
 		trans2.setPromptText("Data (rrrr-mm-dd)");
-		trans2.setMaxWidth(144);
+		trans2.setPrefWidth(144);
+		
+		account0 = new TextField();
+		account0.setPromptText("Nr konta");
+		account0.setPrefWidth(128);
 		
 		account1 = new TextField();
 		account1.setPromptText("Nazwisko");
-		account1.setMaxWidth(128);
+		account1.setPrefWidth(128);
 		
 		account2 = new TextField();
 		account2.setPromptText("Saldo");
-		account2.setMaxWidth(128);
+		account2.setPrefWidth(128);
 		
 		clientID = new ChoiceBox<>();
 		for (int i = 1; i <= clientTable.getItems().size(); i++) {
 			clientID.getItems().add(i);
 		}
-		clientID.setMaxWidth(192);
+		clientID.setPrefWidth(64);
 		clientID.setOnAction(this);
 
-		
 		productID = new ChoiceBox<>();
 		for (int i = 1; i <= productsTable.getItems().size(); i++) {
 			productID.getItems().add(i);
 		}
-		productID.setMaxWidth(192);
+		productID.setPrefWidth(64);
 		productID.setOnAction(this);
 
 		
@@ -110,17 +115,16 @@ public class ShowScene implements EventHandler<ActionEvent> {
 		for (int i = 1; i <= transactionTable.getItems().size(); i++) {
 			transID.getItems().add(i);
 		}
-		transID.setMaxWidth(192);
+		transID.setPrefWidth(64);
 		transID.setOnAction(this);
 		
 		accountID = new ChoiceBox<>();
 		for (int i = 1; i <= accountTable.getItems().size(); i++) {
 			accountID.getItems().add(i);
 		}
-		accountID.setMaxWidth(192);
+		accountID.setPrefWidth(64);
 		accountID.setOnAction(this);
 
-		
 		HBox layoutShow0 = new HBox(16);
 		layoutShow0.setPadding(new Insets(8,8,8,8));
 		layoutShow0.setAlignment(Pos.BOTTOM_CENTER);
@@ -142,7 +146,7 @@ public class ShowScene implements EventHandler<ActionEvent> {
 		HBox layoutShow3 = new HBox(16);
 		layoutShow3.setPadding(new Insets(8,8,8,8));
 		layoutShow3.setAlignment(Pos.BOTTOM_CENTER);
-		layoutShow3.getChildren().addAll(accountID, account1, account2);
+		layoutShow3.getChildren().addAll(accountID, account0, account1, account2);
 		GridPane.setConstraints(layoutShow3, 2, 3);
 
 		GridPane layout = new GridPane();
@@ -159,12 +163,13 @@ public class ShowScene implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		if(event.getSource() == wstecz) {
+			Utils.flushBoxes();
 			WindowForm.mainStage.setScene(WindowForm.mainScene.scene());
 			WindowForm.mainStage.setTitle("Obs³uga bazy danych sklepu \"Pope'seye\"");
 			WindowForm.mainStage.show();
 		}
 		else if (event.getSource() == clientID) {
-			id_value = clientID.getSelectionModel().getSelectedItem().toString();
+			id_value = Klienci.availableIds.get(clientID.getValue()-1).toString();
 			toSplit = Show.selectClient(id_value);
 			String[] splitted = toSplit.split(",");
 			client0.setText(splitted[0]);
@@ -172,7 +177,7 @@ public class ShowScene implements EventHandler<ActionEvent> {
 			client2.setText(splitted[2]);
 		}
 		else if (event.getSource() == productID) {
-			id_value = productID.getSelectionModel().getSelectedItem().toString();
+			id_value = Produkty.avaliableIds.get(productID.getValue()-1).toString();
 			toSplit = Show.selectProduct(id_value);
 			String[] splitted = toSplit.split(",");
 			product0.setText(splitted[0]);
@@ -180,7 +185,7 @@ public class ShowScene implements EventHandler<ActionEvent> {
 			product2.setText(splitted[2]);
 		}
 		else if (event.getSource() == transID) {
-			id_value = transID.getSelectionModel().getSelectedItem().toString();
+			id_value = Zakupy.availableIds.get(transID.getValue()-1).toString();
 			toSplit = Show.selectTransaction(id_value);
 			String[] splitted = toSplit.split(",");
 			trans0.setText(splitted[0]);
@@ -188,11 +193,12 @@ public class ShowScene implements EventHandler<ActionEvent> {
 			trans2.setText(splitted[2]);
 		}
 		else if (event.getSource() == accountID) {
-			id_value = accountID.getSelectionModel().getSelectedItem().toString();
+			id_value = Konto.availableIds.get(accountID.getValue()-1).toString();
 			toSplit = Show.selectAccount(id_value);
 			String[] splitted = toSplit.split(",");
-			account1.setText(splitted[0]);
-			account2.setText(splitted[1]);
+			account0.setText(splitted[0]);
+			account1.setText(splitted[1]);
+			account2.setText(splitted[2]);
 		}
 	}
 }

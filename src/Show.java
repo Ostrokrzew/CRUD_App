@@ -75,10 +75,12 @@ public class Show {
             		+ " INNER JOIN klienci ON konto.id_konto = klienci.id_konto"
             		+ " WHERE id_k == "+id_value);
             while(result.next()) {
+            	int id_konto = result.getInt("id_konto");
                 String nazwisko = result.getString("nazwisko");
                 double kwota = result.getDouble("kwota");
                 String saldo = Double.toString(kwota);
-                konto = nazwisko+","+saldo;
+                String id_kont = Integer.toString(id_konto);
+                konto = id_kont+","+nazwisko+","+saldo;
             }
         } catch (SQLException e) {
             e.printStackTrace();

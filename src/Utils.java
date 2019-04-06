@@ -60,4 +60,56 @@ public class Utils {
 			return "0";
 		}
 	}
+	
+	public static void fillBoxesAdd() {
+		
+		for (int i = 0; i < AddScene.clientTable.getItems().size(); i++) {
+			Klienci.avaliableAccounts.add(AddScene.clientTable.getItems().get(i).getId_konto());
+		}
+		for (int i = 0; i < AddScene.clientTable.getItems().size(); i++) {
+			Klienci.avaliableSurnames.add(AddScene.clientTable.getItems().get(i).getNazwisko());
+		}
+		for (int i = 0; i < AddScene.productsTable.getItems().size(); i++) {
+			Produkty.avaliableProducts.add(AddScene.productsTable.getItems().get(i).getId_produkty());
+		}
+	}
+	
+	public static void fillBoxesMod() {
+
+		for (int i = 0; i < ModScene.clientTable.getItems().size(); i++) {
+			Klienci.avaliableAccounts.add(ModScene.clientTable.getItems().get(i).getId_konto());
+		}
+		for (int i = 0; i < ModScene.clientTable.getItems().size(); i++) {
+			Klienci.avaliableSurnames.add(ModScene.clientTable.getItems().get(i).getNazwisko());
+		}
+		for (int i = 0; i < ModScene.productsTable.getItems().size(); i++) {
+			Produkty.avaliableProducts.add(ModScene.productsTable.getItems().get(i).getId_produkty());
+		}
+		for (int i = 0; i < ModScene.clientTable.getItems().size(); i++) {
+			Klienci.availableIds.add(ModScene.clientTable.getItems().get(i).getId_klienci());
+		}
+	}
+	
+	public static void fillBoxesShow() {
+
+		for (int i = 0; i < ShowScene.productsTable.getItems().size(); i++) {
+			Produkty.avaliableIds.add(ShowScene.productsTable.getItems().get(i).getId_p());
+		}
+		for (int i = 0; i < ShowScene.clientTable.getItems().size(); i++) {
+			Klienci.availableIds.add(ShowScene.clientTable.getItems().get(i).getId_klienci());
+		}
+		for (int i = 0; i < ShowScene.transactionTable.getItems().size(); i++) {
+			Zakupy.availableIds.add(ShowScene.transactionTable.getItems().get(i).getId_zakupy());
+		}
+		for (int i = 0; i < ShowScene.accountTable.getItems().size(); i++) {
+			Konto.availableIds.add(ShowScene.accountTable.getItems().get(i).getId_k());
+		}
+	}
+	
+	public static void flushBoxes() {
+		Klienci.avaliableAccounts.clear();
+		Klienci.avaliableSurnames.clear();
+		Produkty.avaliableProducts.clear();
+		Klienci.availableIds.clear();
+	}
 }
