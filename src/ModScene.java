@@ -32,15 +32,19 @@ public class ModScene implements EventHandler<ActionEvent> {
 			
 		clientTable = Klienci.clientTable();
 		GridPane.setConstraints(clientTable, 0, 0);
+		clientTable.getSelectionModel().selectFirst();
 		
 		productsTable = Produkty.productsTable();
 		GridPane.setConstraints(productsTable, 0, 2);
-		
+		productsTable.getSelectionModel().selectFirst();
+
 		transactionTable = Zakupy.transactionTable();
 		GridPane.setConstraints(transactionTable, 2, 0);
-		
+		transactionTable.getSelectionModel().selectFirst();
+
 		accountTable = Konto.accountTable();
 		GridPane.setConstraints(accountTable, 2, 2);
+		accountTable.getSelectionModel().selectFirst();
 		
 		Utils.fillBoxesMod();
 		
@@ -63,35 +67,46 @@ public class ModScene implements EventHandler<ActionEvent> {
 		client0 = new TextField();
 		client0.setPromptText("Imiê");
 		client0.setPrefWidth(128);
+		client0.setText(clientTable.getSelectionModel().getSelectedItem().getImie());
 		
 		client1 = new TextField();
 		client1.setPromptText("Nazwisko");
 		client1.setPrefWidth(128);
-		
+		client1.setText(clientTable.getSelectionModel().getSelectedItem().getNazwisko());
+
 		client2 = new TextField();
 		client2.setPromptText("Numer konta");
 		client2.setPrefWidth(128);
-		
+		String textNrKontaKlient = Integer.toString(clientTable.getSelectionModel().getSelectedItem().getId_konto());
+		client2.setText(textNrKontaKlient);
+
 		product0 = new TextField();
 		product0.setPromptText("Nazwa");
 		product0.setPrefWidth(128);
+		product0.setText(productsTable.getSelectionModel().getSelectedItem().getNazwa());
 		
 		product1 = new TextField();
 		product1.setPromptText("Cena");
 		product1.setPrefWidth(128);
+		String cenaProdukt = Double.toString(productsTable.getSelectionModel().getSelectedItem().getCena());
+		product1.setText(cenaProdukt);
 		
 		product2 = new TextField();
 		product2.setPromptText("Kod produktu");
 		product2.setPrefWidth(128);
-		
+		String kodProduktuProdukt = Integer.toString(productsTable.getSelectionModel().getSelectedItem().getId_produkty());
+		product2.setText(kodProduktuProdukt);
+
 		trans0 = new ChoiceBox<Integer>();
 		trans0.setItems(Klienci.avaliableAccounts);
 		trans0.setPrefWidth(128);
+		trans0.setValue(transactionTable.getSelectionModel().getSelectedItem().getId_konto());
 		
 		trans1 = new ChoiceBox<Integer>();
 		trans1.setItems(Produkty.avaliableProducts);
 		trans1.setPrefWidth(128);
-		
+		trans1.setValue(transactionTable.getSelectionModel().getSelectedItem().getId_produkty());
+
 		trans2 = new DatePicker();
 		trans2.setPrefWidth(144);
 		trans2.setValue(LocalDate.now());
@@ -99,15 +114,18 @@ public class ModScene implements EventHandler<ActionEvent> {
 		account0 = new ChoiceBox<Integer>();
 		account0.setItems(Klienci.avaliableAccounts);
 		account0.setPrefWidth(128);
+		account0.setValue(accountTable.getSelectionModel().getSelectedItem().getId_konto());
 		
 		account1 = new ChoiceBox<String>();
 		account1.setItems(Klienci.avaliableSurnames);
 		account1.setPrefWidth(128);
-		
+		account1.setValue(accountTable.getSelectionModel().getSelectedItem().getNazwisko());
+
 		account2 = new TextField();
 		account2.setPromptText("Saldo");
 		account2.setPrefWidth(128);
-
+		String kwotaKonto = Double.toString(accountTable.getSelectionModel().getSelectedItem().getKwota());
+		account2.setText(kwotaKonto);
 		
 		HBox layoutMod0 = new HBox(16);
 		layoutMod0.setPadding(new Insets(8,8,8,8));
@@ -196,7 +214,15 @@ public class ModScene implements EventHandler<ActionEvent> {
 				boolean okey = false;
 				if (alertMod.answer == true) {
 					value0 = product0.getText();
-					value1 = product1.getText();
+					try {
+						double temp = Double.parseDouble(product2.getText().trim());
+						value1 = Double.toString(temp);
+						okey = true;
+					} catch(NumberFormatException e) {
+						PopUp konto = new PopUp();
+						konto.popUp("B³¹d", "B³êdna cena produktu.\nSpróbuj jeszcze raz.", false);
+						okey = false;
+					}
 					okey = true;
 					try {
 						int temp = Integer.parseInt(product2.getText().trim());
@@ -283,6 +309,12 @@ public class ModScene implements EventHandler<ActionEvent> {
 			Utils.refresh();
 			Utils.flushBoxes();
 			Utils.fillBoxesMod();
+		}
+		if (event.getSource() == clientTable) {
+			client0.setText(clientTable.getSelectionModel().getSelectedItem().getImie());
+			client1.setText(clientTable.getSelectionModel().getSelectedItem().getNazwisko());
+			String textNrKontaKlient = Integer.toString(clientTable.getSelectionModel().getSelectedItem().getId_konto());
+			client2.setText(textNrKontaKlient);
 		}
 	}
 }

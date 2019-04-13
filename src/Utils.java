@@ -33,7 +33,7 @@ public class Utils {
 	
 	public static String getRowProdukty() {
 		try {
-			int row = Produkty.productsTable.getSelectionModel().getSelectedItem().getId_produkty();
+			int row = Produkty.productsTable.getSelectionModel().getSelectedItem().getId_p();
 			String id = Integer.toString(row);
 			return id;
 		} catch (NullPointerException e) {
@@ -53,7 +53,7 @@ public class Utils {
 	
 	public static String getRowKonta() {
 		try {
-			int row = Konto.accountTable.getSelectionModel().getSelectedItem().getId_konto();
+			int row = Konto.accountTable.getSelectionModel().getSelectedItem().getId_k();
 			String id = Integer.toString(row);
 			return id;
 		} catch (NullPointerException e) {

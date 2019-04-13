@@ -39,7 +39,7 @@ public class Update {
 	}
 	
 	public static String changeAccount(String value0, String value1, String value2, String id_value) {
-		String update = String.format("UPDATE konto SET id_konto = %s, kwota = %s, nazwisko = '%s' WHERE id_konto == %s", value0, value1, value2, id_value);
+		String update = String.format("UPDATE konto SET id_konto = %s, kwota = %s, nazwisko = '%s' WHERE id_k == %s", value0, value1, value2, id_value);
         try {
             SQLite.stat.execute(update);
         } catch (SQLException e) {

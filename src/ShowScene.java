@@ -22,7 +22,8 @@ public class ShowScene implements EventHandler<ActionEvent> {
 	
 	TextField client0, client1, client2, product0, product1, product2, trans0, trans1, trans2, account0, account1, account2;
 	ChoiceBox<Integer> clientID, productID, transID, accountID;
-	private String toSplit, id_value;
+	private String toSplit;
+	int id_value;
 	
 	public Scene scene() {
 		
@@ -170,32 +171,36 @@ public class ShowScene implements EventHandler<ActionEvent> {
 			WindowForm.mainStage.show();
 		}
 		else if (event.getSource() == clientID) {
-			id_value = Klienci.availableIds.get(clientID.getValue()-1).toString();
-			toSplit = Show.selectClient(id_value);
+			id_value = clientTable.getItems().get(clientID.getValue()-1).getId_klienci();
+			String id_k = Integer.toString(id_value);
+			toSplit = Show.selectClient(id_k);
 			String[] splitted = toSplit.split(",");
 			client0.setText(splitted[0]);
 			client1.setText(splitted[1]);
 			client2.setText(splitted[2]);
 		}
 		else if (event.getSource() == productID) {
-			id_value = Produkty.avaliableIds.get(productID.getValue()-1).toString();
-			toSplit = Show.selectProduct(id_value);
+			id_value = productsTable.getItems().get(productID.getValue()-1).getId_p();
+			String id_k = Integer.toString(id_value);
+			toSplit = Show.selectProduct(id_k);
 			String[] splitted = toSplit.split(",");
 			product0.setText(splitted[0]);
 			product1.setText(splitted[1]);
 			product2.setText(splitted[2]);
 		}
 		else if (event.getSource() == transID) {
-			id_value = Zakupy.availableIds.get(transID.getValue()-1).toString();
-			toSplit = Show.selectTransaction(id_value);
+			id_value = transactionTable.getItems().get(transID.getValue()-1).getId_zakupy();
+			String id_k = Integer.toString(id_value);
+			toSplit = Show.selectTransaction(id_k);
 			String[] splitted = toSplit.split(",");
 			trans0.setText(splitted[0]);
 			trans1.setText(splitted[1]);
 			trans2.setText(splitted[2]);
 		}
 		else if (event.getSource() == accountID) {
-			id_value = Konto.availableIds.get(accountID.getValue()-1).toString();
-			toSplit = Show.selectAccount(id_value);
+			id_value = accountTable.getItems().get(accountID.getValue()-1).getId_k();
+			String id_k = Integer.toString(id_value);
+			toSplit = Show.selectAccount(id_k);
 			String[] splitted = toSplit.split(",");
 			account0.setText(splitted[0]);
 			account1.setText(splitted[1]);

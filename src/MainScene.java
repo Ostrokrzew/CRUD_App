@@ -12,10 +12,11 @@ public class MainScene implements EventHandler<ActionEvent> {
 	Button dodaj, usun, zmodyfikuj, pokaz, reset, clear, insert;
 	PopUp alertRes, alertClr, alertInit;
 	boolean done;
-	String database = SQLite.stat.toString();
+	String database;
 	
 	public Scene scene() {
 		
+		database = SQLite.stat.toString();
 		if (database == null || database == "") {
 			done = false;
 		}
