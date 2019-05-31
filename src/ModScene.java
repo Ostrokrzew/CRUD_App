@@ -213,10 +213,10 @@ public class ModScene implements EventHandler<ActionEvent> {
 				id_value = Utils.getRowProdukty();
 				boolean okey = false;
 				if (alertMod.answer == true) {
-					value0 = product0.getText();
+					value1 = product0.getText();
 					try {
-						double temp = Double.parseDouble(product2.getText().trim());
-						value1 = Double.toString(temp);
+						double temp = Double.parseDouble(product1.getText().trim());
+						value2 = Double.toString(temp);
 						okey = true;
 					} catch(NumberFormatException e) {
 						PopUp konto = new PopUp();
@@ -226,7 +226,7 @@ public class ModScene implements EventHandler<ActionEvent> {
 					okey = true;
 					try {
 						int temp = Integer.parseInt(product2.getText().trim());
-						value2 = Integer.toString(temp);
+						value0 = Integer.toString(temp);
 						okey = true;
 					} catch(NumberFormatException e) {
 						PopUp konto = new PopUp();
@@ -284,11 +284,11 @@ public class ModScene implements EventHandler<ActionEvent> {
 				boolean okey = false;
 				if (alertMod.answer == true) {
 					value0 = account0.getValue().toString();
-					value1 = account1.getValue().toString();
+					value2 = account1.getValue().toString();
 					okey = true;
 					try {
 						double temp = Double.parseDouble(account2.getText().trim());
-						value2 = Double.toString(temp);
+						value1 = Double.toString(temp);
 						okey = true;
 					} catch(NumberFormatException e) {
 						PopUp konto = new PopUp();

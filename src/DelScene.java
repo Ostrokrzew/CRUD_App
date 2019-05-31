@@ -109,11 +109,11 @@ public class DelScene implements EventHandler<ActionEvent> {
 		}
 		else if(event.getSource() == delete1) {
 			if (Utils.getRowProdukty() != "0") {
-			alertDel.popUp("Usuni阠ie", "Czy na pewno chcesz usun规 produkt?\nOperacji nie mo縩a cofn规!", true);
-			if (alertDel.answer == true) {
-				param = Utils.getRowProdukty();
-				Delete.deleteProduct(param);
-			}
+				alertDel.popUp("Usuni阠ie", "Czy na pewno chcesz usun规 produkt?\nOperacji nie mo縩a cofn规!", true);
+				if (alertDel.answer == true) {
+					param = Utils.getRowProdukty();
+					Delete.deleteProduct(param);
+				}
 			}
 			else {
 				alertDel.popUp("B彻d", "Zaznacz wiersz, kt髍y chcesz usun规.", false);

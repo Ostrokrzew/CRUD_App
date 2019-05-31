@@ -1,3 +1,6 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Utils {
 	
 	public static void refresh() {
@@ -103,6 +106,20 @@ public class Utils {
 		}
 		for (int i = 0; i < ShowScene.accountTable.getItems().size(); i++) {
 			Konto.availableIds.add(ShowScene.accountTable.getItems().get(i).getId_k());
+		}
+	}
+	
+	public static void isDBEmpty() {
+		try {
+			ResultSet empty = SQLite.stat.executeQuery("SELECT * FROM klienci");
+			if (empty.getString(1) != null) {
+				MainScene.done = true;
+			}
+			else {
+				MainScene.done = false;
+			}
+		} catch (SQLException e) {
+            e.printStackTrace();
 		}
 	}
 	

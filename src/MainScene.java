@@ -11,15 +11,12 @@ public class MainScene implements EventHandler<ActionEvent> {
 	
 	Button dodaj, usun, zmodyfikuj, pokaz, reset, clear, insert;
 	PopUp alertRes, alertClr, alertInit;
-	boolean done;
+	public static boolean done;
 	String database;
 	
 	public Scene scene() {
 		
-		database = SQLite.stat.toString();
-		if (database == null || database == "") {
-			done = false;
-		}
+		Utils.isDBEmpty();
 		
 		insert = new Button("zainicjuj bazê danych i uzupe³nij j¹ domyœlnymi rekordami");
 		insert.setOnAction(this);
@@ -88,6 +85,7 @@ public class MainScene implements EventHandler<ActionEvent> {
 			alertRes.popUp("Reset", "Czy na pewno chcesz zresetowaæ ca³¹ bazê danych?", true);
 			if (alertRes.answer == true) {
 				AddRecords.reset();
+				alertRes.popUp("Inicjacja", "Pomyœlnie zresetowano bazê danych.", false);
 				done = true;
 			}
 		}

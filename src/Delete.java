@@ -15,7 +15,7 @@ public class Delete {
 	}
 	
 	public static String deleteProduct(String param) {
-        String delete = String.format("DELETE FROM produkty WHERE id_produkty == %s", param);
+        String delete = String.format("DELETE FROM produkty WHERE id_p == %s", param);
         try {
             SQLite.stat.execute(delete);
         } catch (SQLException e) {
